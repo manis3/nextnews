@@ -9,10 +9,7 @@ const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {
-        // email:{label:"Email",type:"email",placeholder:"name@gmail.com"},
-        // password:{label:"Password",type:"password",placeholder:"password"},
-      },
+      credentials: {},
       authorize(credentials, req) {
         const { email, password } = credentials as {
           email: string;

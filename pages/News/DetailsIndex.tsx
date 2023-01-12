@@ -60,7 +60,12 @@ const DetailsIndex: React.FC<props> = ({
               overflow={"hidden"}
             >
               <Box bg={"gray.100"} mt={-6} mx={-6} pos={"relative"}>
-                <Image src={urlToImage} w="100%" h="10rem" />
+                <Image
+                  src={urlToImage}
+                  w="100%"
+                  h="10rem"
+                  alt="404 Image not Found"
+                />
               </Box>
               <Stack>
                 <Heading
