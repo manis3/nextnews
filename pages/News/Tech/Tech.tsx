@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Flex,
   Heading,
@@ -26,15 +27,18 @@ function Tech() {
 
   useEffect(() => {
     setLoading(true);
-    const techdata = async () => {
-      const technews = await fetch(
+    axios
+      .get(
         "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cabf82fa3334cc299f863360873805b"
-      );
-      const myText = await technews.json();
-      setTechnews(myText.articles);
-      setLoading(false);
-    };
-    techdata();
+      )
+      .then(({ data }) => {
+        setTechnews(data.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setLoading(false);
   }, []);
 
   const handlesearch = async (
@@ -42,16 +46,20 @@ function Tech() {
   ) => {
     e.preventDefault();
     setLoading(true);
-    const searchdata = async () => {
-      const technews = await fetch(
+    axios
+      .get(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      );
-      const myText = await technews.json();
-      setTechnews(myText.articles);
-      setHeadervalue(String(input));
-      setLoading(false);
-    };
-    searchdata();
+      )
+      .then(({ data }) => {
+        setTechnews(data.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setHeadervalue(String(input));
+    setLoading(false);
+
     setInput(" ");
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
@@ -62,16 +70,20 @@ function Tech() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      const searchdata = async () => {
-        const technews = await fetch(
+      axios
+        .get(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        );
-        const myText = await technews.json();
-        setTechnews(myText.articles);
-        setHeadervalue(String(input));
-        setLoading(false);
-      };
-      searchdata();
+        )
+        .then(({ data }) => {
+          setTechnews(data.articles);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      setHeadervalue(String(input));
+      setLoading(false);
+
       setInput(" ");
     }
   };

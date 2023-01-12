@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Flex,
   Heading,
@@ -30,15 +31,12 @@ function Entertainment() {
 
   useEffect(() => {
     setLoading(true);
-    const techdata = async () => {
-      const entertainmentnews = await fetch(
+   axios.get(
         "https://newsapi.org/v2/top-headlines?category=entertainment&apiKey=17be372ef3dc4cb4927e75543b3b2e98"
-      );
-      const myText = await entertainmentnews.json();
-      setentertainmentnews(myText.articles);
+      ).then(({data})=>{setentertainmentnews(data.articles)}).catch(err =>{console.log(err)});
+     
       setLoading(false);
-    };
-    techdata();
+   
   }, []);
 
   const handlesearch = async (
@@ -46,16 +44,20 @@ function Entertainment() {
   ) => {
     e.preventDefault();
     setLoading(true);
-    const searchdata = async () => {
-      const entertainmentnews = await fetch(
+    axios
+      .get(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      );
-      const myText = await entertainmentnews.json();
-      setentertainmentnews(myText.articles);
-      setHeadervalue(String(input));
-      setLoading(false);
-    };
-    searchdata();
+      )
+      .then(({ data }) => {
+        setentertainmentnews(data.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setHeadervalue(String(input));
+    setLoading(false);
+
     setInput(" ");
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
@@ -67,16 +69,20 @@ function Entertainment() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      const searchdata = async () => {
-        const entertainmentnews = await fetch(
+      axios
+        .get(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        );
-        const myText = await entertainmentnews.json();
-        setentertainmentnews(myText.articles);
-        setHeadervalue(String(input));
-        setLoading(false);
-      };
-      searchdata();
+        )
+        .then(({ data }) => {
+          setentertainmentnews(data.articles);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      setHeadervalue(String(input));
+      setLoading(false);
+
       setInput(" ");
     }
   };

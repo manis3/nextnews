@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Flex,
   Heading,
@@ -27,15 +28,17 @@ function Health() {
 
   useEffect(() => {
     setLoading(true);
-    const techdata = async () => {
-      const healthnews = await fetch(
+    axios
+      .get(
         "https://newsapi.org/v2/top-headlines?category=Health&apiKey=7cabf82fa3334cc299f863360873805b"
-      );
-      const myText = await healthnews.json();
-      sethealthnews(myText.articles);
-      setLoading(false);
-    };
-    techdata();
+      )
+      .then(({ data }) => {
+        sethealthnews(data.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setLoading(false);
   }, []);
 
   const handlesearch = async (
@@ -44,16 +47,19 @@ function Health() {
     e.preventDefault();
 
     setLoading(true);
-    const searchdata = async () => {
-      const healthnews = await fetch(
+    axios
+      .get(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      );
-      const myText = await healthnews.json();
-      sethealthnews(myText.articles);
-      setHeadervalue(String(input));
-      setLoading(false);
-    };
-    searchdata();
+      )
+      .then(({ data }) => {
+        sethealthnews(data.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setHeadervalue(String(input));
+    setLoading(false);
+
     setInput(" ");
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
@@ -65,16 +71,20 @@ function Health() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      const searchdata = async () => {
-        const healthnews = await fetch(
+      axios
+        .get(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        );
-        const myText = await healthnews.json();
-        sethealthnews(myText.articles);
-        setHeadervalue(String(input));
-        setLoading(false);
-      };
-      searchdata();
+        )
+        .then(({ data }) => {
+          sethealthnews(data.articles);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      setHeadervalue(String(input));
+      setLoading(false);
+
       setInput(" ");
     }
   };
