@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 const AuthOptions: NextAuthOptions = {
   session: {
@@ -17,12 +17,12 @@ const AuthOptions: NextAuthOptions = {
         };
 
         //////////////////Perform login logic  to find out the user from db/////////
-        const router = useRouter();
+        // const router = useRouter();
         if (email !== "ma@gmail.com" || password !== "12345") {
           throw new Error("invalid Email and Password");
         }
 
-        router.push("../../Server/Dashboard");
+        // router.push("../../Server/Dashboard");
         return {
           id: "1234",
           name: "Manish Hyongoju",
