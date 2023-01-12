@@ -136,6 +136,7 @@ function Science() {
             currentPost.map((post, index) => {
               return (
                 <DetailsIndex
+                  key={index}
                   title={post.title}
                   description={post.description}
                   urlToImage={post.urlToImage}
@@ -144,6 +145,7 @@ function Science() {
                   author={post.author || "Anonymous"}
                   content={String(post.content)}
                   post={post}
+                  category={"science"}
                 />
               );
             })}

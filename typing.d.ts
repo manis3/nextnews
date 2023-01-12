@@ -3,7 +3,6 @@ type Article ={
     content(content: any): String;
     urlToImage: string;
     author:string | null;
-    category:string;
     country:string;
     description:string;
     image:string | null;

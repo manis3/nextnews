@@ -24,6 +24,7 @@ interface props {
   author: string;
   content: String;
   post: Article;
+  category: string;
 }
 
 const DetailsIndex: React.FC<props> = ({
@@ -34,6 +35,7 @@ const DetailsIndex: React.FC<props> = ({
   author,
   content,
   post,
+  category,
 }) => {
   return (
     <>
@@ -42,10 +44,10 @@ const DetailsIndex: React.FC<props> = ({
           justifyContent={{ sm: "center" }}
           maxW="md"
           height={"30em"}
+          m="1px"
           p={6}
           justify={"space-between"}
           _hover={{ transform: "translateY(2px)", bg: "cream.600" }}
-          m="2x"
         >
           <Center>
             <Box
@@ -87,7 +89,7 @@ const DetailsIndex: React.FC<props> = ({
             </Box>
           </Center>
 
-          <ReadMore post={post} />
+          <ReadMore post={post} category={category} />
         </Card>
       </GridItem>
     </>

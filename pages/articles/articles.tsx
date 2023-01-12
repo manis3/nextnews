@@ -26,19 +26,18 @@ import { useRouter } from "next/router";
 import Livetime from "../Livetime/Livetime";
 interface props {
   articles: Article;
+  category: string;
 }
 
-export default function articles({ articles }: props) {
+export default function articles({ articles, category }: props) {
   const { query } = useRouter();
-
   const [data, setData] = useState<Article[] | []>([]);
-
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const topnews = async () => {
       setLoading(true);
       const technews = await fetch(
-        `https://newsapi.org/v2/everything?q=${query.author}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${query.category}&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
       );
       const myText = await technews.json();
       setData(myText.articles);
@@ -89,10 +88,12 @@ export default function articles({ articles }: props) {
                     </Text>
                   </Center>
                   <Flex>
-                    <Text py="2">{query.description}</Text>
+                    <Text py="2">{query.description || "-"}</Text>
                   </Flex>
                   <Flex>
-                    <Text py="2">{query.content}</Text>
+                    <Text py="2">
+                      {(query.content && query.content) || "Nothing to print"}
+                    </Text>
                   </Flex>
                   <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
                     <Avatar
