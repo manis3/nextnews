@@ -2,7 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { useRouter } from "next/router";
 
-const authOptions: NextAuthOptions = {
+const AuthOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -45,4 +45,4 @@ const authOptions: NextAuthOptions = {
   //     }
   // }
 };
-export default NextAuth(authOptions);
+export default NextAuth(AuthOptions);

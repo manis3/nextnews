@@ -8,13 +8,12 @@ type props = {
 
 export default function ReadMore({ post, category }: props) {
   const router = useRouter();
-  console.log("afsfasfd" + category);
   const handleClick = () => {
     console.log(post);
     const query = Object.entries(post)
       .map(([key, value]) => `${key}=${value}`)
       .join("&");
-    const url = `/articles/articles?category=${category}&&query=${query}`;
+    const url = `/articles/Articles?category=${category}&&query=${query}`;
     router.push(url);
   };
   return (

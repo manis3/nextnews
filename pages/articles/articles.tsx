@@ -29,7 +29,7 @@ interface props {
   category: string;
 }
 
- function articles({ articles, category }: props) {
+ function Articles({ articles, category }: props) {
    const { query } = useRouter();
    const [data, setData] = useState<Article[] | []>([]);
    const [loading, setLoading] = useState(false);
@@ -169,4 +169,4 @@ interface props {
      </>
    );
  }
- export default articles;
+ export default Articles;
