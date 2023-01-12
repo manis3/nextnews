@@ -138,7 +138,7 @@ export default function articles({ articles, category }: props) {
                   slicedata.map((post, index) => {
                     return (
                       <Link href={String(post.url)} target="_blank">
-                        <CardBody>
+                        <CardBody key={index}>
                           <Stack divider={<StackDivider />} spacing="2">
                             <Box
                               borderBottom={"solid"}
