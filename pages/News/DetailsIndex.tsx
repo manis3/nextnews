@@ -79,9 +79,11 @@ const DetailsIndex: React.FC<props> = ({
                   fontSize={"xl"}
                   fontFamily={"body"}
                 >
-                  {title.slice(0, 47)}
+                  {String(title.slice(0, 47))}
                 </Heading>
-                <Text color={"gray.500"}>{content.slice(0, 50) + "..."}</Text>
+                <Text color={"gray.500"}>
+                  {String(content.slice(0, 50) + "...")}
+                </Text>
               </Stack>
               <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
                 <Avatar
@@ -93,7 +95,8 @@ const DetailsIndex: React.FC<props> = ({
                   <Text fontWeight={600}>{author}</Text>
                   <Text color={"gray.500"}>
                     {/* {publish} */}
-                    {publish?.slice(0, 10)} . <Livetime time={publish} />
+                    {String(publish?.slice(0, 10))} .{" "}
+                    <Livetime time={publish} />
                   </Text>
                 </Stack>
               </Stack>
