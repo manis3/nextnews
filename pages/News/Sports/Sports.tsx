@@ -12,9 +12,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ItemPage from "../ItemPage";
+import ItemPage from "../../../services/ItemPage";
 ("use Client");
-const DetailsIndex = React.lazy(() => import("../DetailsIndex"));
+const DetailsIndex = React.lazy(() => import("../../../services/DetailsIndex"));
 function Sports() {
   const [input, setInput] = useState<string>("");
   const [sportsnews, setsportsnews] = useState<Article[] | []>([]);

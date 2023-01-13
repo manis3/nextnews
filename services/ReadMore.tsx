@@ -22,6 +22,3 @@ export default function ReadMore({ post, category }: props) {
     </>
   );
 }
-
-
-

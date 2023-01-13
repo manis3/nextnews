@@ -25,7 +25,7 @@ import {
 import Link from "next/link";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-import Livetime from "../Livetime/Livetime";
+import Livetime from "../../services/Livetime/Livetime";
 interface props {
   articles: Article;
   category: string;

@@ -14,7 +14,7 @@ import {
 
 import ReadMore from "./ReadMore";
 
-import Livetime from "../Livetime/Livetime";
+import Livetime from "./Livetime/Livetime";
 interface props {
   title: string;
   description: string;
