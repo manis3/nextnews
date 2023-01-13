@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: curl_import_config
+      authentication_3e4e626de9: rensselaer::stepzen.net+1000::8871a793c92b09304d2ca3b328ae2d05badf3f562dccb9fbc3b84ab5bde80b7a

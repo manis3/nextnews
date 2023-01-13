@@ -1,10 +1,10 @@
 import React from "react";
+import { BounceLoader } from "react-spinners";
 import axios from "axios";
 import {
   Flex,
   Heading,
   Grid,
-  Spinner,
   Center,
   UnorderedList,
   Box,
@@ -27,18 +27,15 @@ function Tech() {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(
+    const techdata = async () => {
+      const technews = await axios(
         "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cabf82fa3334cc299f863360873805b"
-      )
-      .then(({ data }) => {
-        setTechnews(data.articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
 
-    setLoading(false);
+      setTechnews(technews.data.articles);
+      setLoading(false);
+    };
+    techdata();
   }, []);
 
   const handlesearch = async (
@@ -46,20 +43,15 @@ function Tech() {
   ) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .get(
+    const searchdata = async () => {
+      const technews = await axios(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      )
-      .then(({ data }) => {
-        setTechnews(data.articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setHeadervalue(String(input));
-    setLoading(false);
-
+      );
+      setTechnews(technews.data.articles);
+      setHeadervalue(String(input));
+      setLoading(false);
+    };
+    searchdata();
     setInput(" ");
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
@@ -70,20 +62,15 @@ function Tech() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      axios
-        .get(
+      const searchdata = async () => {
+        const technews = await axios(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        )
-        .then(({ data }) => {
-          setTechnews(data.articles);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      setHeadervalue(String(input));
-      setLoading(false);
-
+        );
+        setTechnews(technews.data.articles);
+        setHeadervalue(String(input));
+        setLoading(false);
+      };
+      searchdata();
       setInput(" ");
     }
   };
@@ -132,7 +119,13 @@ function Tech() {
       </Center>
       <Center>
         {" "}
-        <Box> {loading && <Spinner />}</Box>
+        {
+          <BounceLoader
+            loading={loading}
+            color={"rgb(94, 100, 114)"}
+            cssOverride={{ margin: 150 }}
+          />
+        }
       </Center>
       <Center>
         <Grid

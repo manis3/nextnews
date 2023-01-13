@@ -1,4 +1,5 @@
 import React from "react";
+import { BounceLoader } from "react-spinners";
 import axios from "axios";
 import {
   Flex,
@@ -29,16 +30,15 @@ function Science() {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(
+    const techdata = async () => {
+      const sciencenews = await axios(
         "https://newsapi.org/v2/top-headlines?category=science&apiKey=7cabf82fa3334cc299f863360873805b"
-      )
-      .then(({ data }) => {
-        setsciencenews(data.articles);
-      })
-      .catch((err) => console.log(err));
+      );
 
-    setLoading(false);
+      setsciencenews(sciencenews.data.articles);
+      setLoading(false);
+    };
+    techdata();
   }, []);
 
   const handlesearch = async (
@@ -46,21 +46,16 @@ function Science() {
   ) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .get(
+    const searchdata = async () => {
+      const sciencenews = await axios(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      )
-      .then(({ data }) => {
-        setsciencenews(data.articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setHeadervalue(String(input));
-
+      );
+      setsciencenews(sciencenews.data.articles);
+      setHeadervalue(String(input));
+      setLoading(false);
+    };
+    searchdata();
     setInput(" ");
-    setLoading(false);
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
   const firstPostIndex: number = lastPostIndex - Number(postPerPage);
@@ -71,19 +66,15 @@ function Science() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      axios
-        .get(
+      const searchdata = async () => {
+        const sciencenews = await axios(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        )
-        .then(({ data }) => {
-          setsciencenews(data.articles);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setHeadervalue(String(input));
-      setLoading(false);
-
+        );
+        setsciencenews(sciencenews.data.articles);
+        setHeadervalue(String(input));
+        setLoading(false);
+      };
+      searchdata();
       setInput(" ");
     }
   };
@@ -132,7 +123,13 @@ function Science() {
       </Center>
       <Center>
         {" "}
-        <Box> {loading && <Spinner />}</Box>
+        {
+          <BounceLoader
+            loading={loading}
+            color={"rgb(94, 100, 114)"}
+            cssOverride={{ margin: 150 }}
+          />
+        }
       </Center>
       <Center>
         <Grid

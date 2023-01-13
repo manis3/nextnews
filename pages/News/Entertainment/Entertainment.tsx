@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { BounceLoader } from "react-spinners";
 import {
   Flex,
   Heading,
@@ -31,12 +32,14 @@ function Entertainment() {
 
   useEffect(() => {
     setLoading(true);
-   axios.get(
+    const techdata = async () => {
+      const entertainmentnews = await axios(
         "https://newsapi.org/v2/top-headlines?category=entertainment&apiKey=17be372ef3dc4cb4927e75543b3b2e98"
-      ).then(({data})=>{setentertainmentnews(data.articles)}).catch(err =>{console.log(err)});
-     
+      );
+      setentertainmentnews(entertainmentnews.data.articles);
       setLoading(false);
-   
+    };
+    techdata();
   }, []);
 
   const handlesearch = async (
@@ -44,20 +47,15 @@ function Entertainment() {
   ) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .get(
+    const searchdata = async () => {
+      const entertainmentnews = await axios(
         `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-      )
-      .then(({ data }) => {
-        setentertainmentnews(data.articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setHeadervalue(String(input));
-    setLoading(false);
-
+      );
+      setentertainmentnews(entertainmentnews.data.articles);
+      setHeadervalue(String(input));
+      setLoading(false);
+    };
+    searchdata();
     setInput(" ");
   };
   const lastPostIndex: number = Number(currentPage) * Number(postPerPage);
@@ -69,20 +67,15 @@ function Entertainment() {
     if (e.key === "Enter") {
       e.preventDefault();
       setLoading(true);
-      axios
-        .get(
+      const searchdata = async () => {
+        const entertainmentnews = await axios(
           `https://newsapi.org/v2/everything?q=${input}&from=2022-12-30&to=2022-12-30&sortBy=popularity&apiKey=17be372ef3dc4cb4927e75543b3b2e98`
-        )
-        .then(({ data }) => {
-          setentertainmentnews(data.articles);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      setHeadervalue(String(input));
-      setLoading(false);
-
+        );
+        setentertainmentnews(entertainmentnews.data.articles);
+        setHeadervalue(String(input));
+        setLoading(false);
+      };
+      searchdata();
       setInput(" ");
     }
   };
@@ -132,7 +125,13 @@ function Entertainment() {
 
       <Center>
         {" "}
-        <Box> {loading && <Spinner />}</Box>
+        {
+          <BounceLoader
+            loading={loading}
+            color={"rgb(94, 100, 114)"}
+            cssOverride={{ margin: 150 }}
+          />
+        }
       </Center>
       <Center>
         <Grid

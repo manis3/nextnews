@@ -41,13 +41,19 @@ const DetailsIndex: React.FC<props> = ({
     <>
       <GridItem>
         <Card
+          bg={"none"}
           justifyContent={{ sm: "center" }}
+          border="none"
           maxW="md"
           height={"30em"}
           m="1px"
           p={6}
           justify={"space-between"}
-          _hover={{ transform: "translateY(2px)", bg: "cream.600" }}
+          _hover={{
+            transform: "translateY(2px)",
+            bg: "rgb(94, 100, 114)",
+            transition: "0.3s linear",
+          }}
         >
           <Center>
             <Box
